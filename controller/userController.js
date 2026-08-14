@@ -1,13 +1,13 @@
-import pool from "../config/db.js";
-import { sendWelcomeMessage } from "../util/emailMessage.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import dotenv from 'dotenv';
-import { Resend } from "resend";
-dotenv.config();
+import pool from "../config/db.js";
+import { sendWelcomeMessage } from "../util/emailMessage.js";
 
 
-const createAccount = async (req, res) => {
+
+
+export const createAccount = async (req, res) => {
     try {
         let {name, username, email, password } = req.body;
 
@@ -71,4 +71,15 @@ export const userLogin = async (req, res) => {
         res.status(500).json({message: error.message});
     }
 
+}
+
+export let getUser = async(req, res)=>{
+    try {
+        let user = await pool.query("SELECT name, username, email FROM game_users WHERE id = $1",[req.user.id]);
+        res.status(200).json(user.rows[0]);
+        
+    } catch (error) {
+         res.status(500).json({message: error.message});
+         console.error(error);
+    }
 }
