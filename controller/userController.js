@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import pool from "../config/db.js";
 import { sendWelcomeMessage } from "../util/emailMessage.js";
 
-
+dotenv.config();
 
 
 export const createAccount = async (req, res) => {
@@ -23,7 +23,7 @@ export const createAccount = async (req, res) => {
 
         let token = jwt.sign(
             {id: newUser.rows[0].id},
-            process.env.process.env.JWT_Secret,
+            process.env.JWT_Secret,
             {expiresIn: "1d"}
         );
 
@@ -31,11 +31,11 @@ export const createAccount = async (req, res) => {
             message: "account created successfully",
             token,
             user: newUser.rows[0]
-        })
-        sendWelcomeMessage(email, name);
-
+        });
+        
+        sendWelcomeMessage();
     } catch (error) {
-        console.error(error);
+        console.log(error);
         return res.status(500).json({message: "Internal server error"})
     }
 }
