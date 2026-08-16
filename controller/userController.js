@@ -32,9 +32,10 @@ export const createAccount = async (req, res) => {
             token,
             user: newUser.rows[0]
         });
-        let total_user = await pool.query("SELECT COUNT(*) FROM game_users");
+        let total_user = await pool.query("SELECT COUNT(*) AS total_user FROM game_users");
+        let time = newUser.rows[0].created_at;
         
-        sendWelcomeMessage(name, total_user);
+        sendWelcomeMessage(name, total_user, time);
     } catch (error) {
         console.log(error);
         return res.status(500).json({message: "Internal server error"})

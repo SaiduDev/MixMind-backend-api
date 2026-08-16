@@ -6,7 +6,7 @@ dotenv.config();
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const sendWelcomeMessage = async (name, total_user) => {
+export const sendWelcomeMessage = async (name, total_user, time) => {
 
 
 
@@ -18,7 +18,9 @@ export const sendWelcomeMessage = async (name, total_user) => {
             <h1>New user account created on Mix Mind Game</h1>
 
     
-            <code>'${name} created and account, Total users is Now: ${total_user.rows[0]}'</code>
+            <p>User Name: ${name}</p>
+            <p>Total Users: <strong>${total_user.rows[0].total_user}</strong></p>
+            <p>Date: <strong>${time}</strong></p>
 
            
         `
