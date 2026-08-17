@@ -12,10 +12,9 @@ try {
     origin: "https://mind-mix-game.vercel.app",
     methods:[ "GET","POST","PUT","DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
-    
    }));
     app.use(helmet());
-    app.use(express.json());
+    app.use(express.json({limit: "10kb"}));
 
     app.use("/api", userRouter);
 
