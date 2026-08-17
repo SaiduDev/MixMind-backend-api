@@ -8,7 +8,12 @@ dotenv.config();
 let app = express();
 
 try {
-    app.use(cors());
+   app.use(cors({
+    origin: "https://mind-mix-game.vercel.app",
+    methods:[ "GET","POST","PUT","DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+    
+   }));
     app.use(helmet());
     app.use(express.json());
 
