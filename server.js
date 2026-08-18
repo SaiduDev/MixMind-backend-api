@@ -10,7 +10,7 @@ let app = express();
 
 try {
    app.use(cors({
-    origin: "https://mind-mix-game.vercel.app",
+    origin: "https://mix-mind-game.vercel.app/",
     methods:[ "GET","POST","PUT","DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
    }));
